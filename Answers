@@ -1,0 +1,17 @@
+- [ ] Explain what a token is used for.
+- [ ] What steps can you take in your web apps to keep your data secure?
+- [ ] Describe how web servers work.
+- [ ] Which HTTP methods can be mapped to the CRUD acronym that we use when interfacing with APIs/Servers.
+
+A token is used to create a generate an id, which is used to autheticate to a web site. Once the token has been
+created for the user they will then be able to access all routes that are protected by the website..
+
+Data can be secured in web apps by putting all of the data that is important, and you only want autheticated users to have
+access to behind private routes, which will require authetication to be able to properly see the contents of.
+
+Web servers are used to handle all of the requests that users make to the URL which is then resolved to an IP that connects
+to it. Every time a resource is called on by the client (which is a user using some type of browser) the webpage will rerender based on the request
+the user makse
+
+The HTTP methods that can be mapped to the CRUD acronyms are GET, POST, CATCH, PUT, and DELETE. CRUD stands for
+Create, Read, Update, Delete is what crud status for. These are used to read and write to databases that power websites and web applications on the web.

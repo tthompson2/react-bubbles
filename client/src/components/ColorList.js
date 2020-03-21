@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-
+import { axiosWithAuth } from "../utils/axiosWithAuth";
+ 
 const initialColor = {
   color: "",
   code: { hex: "" }
@@ -24,22 +25,28 @@ const ColorList = ({ colors, updateColors }) => {
     // think about where will you get the id from...
     // where is it saved right now?
 
-    const colorToUpdate = colors.find(color => {
-      return `${color.id}` === e.match.params.id;
+    axiosWithAuth()
+    .put(`colors/${colorToEdit.id}`, colorToEdit)
+    .then(res => {
+      const newColors = [...colors];
+      newColors[colors.findIndex((color) => color === res.data.id)] = res.data;
+      updateColors(newColors);
     })
+    .catch(err => console.log(err))
 
-    console.log("colorToUpdate:", colorToUpdate);
-
-    if(colorToUpdate) {
-      setColorToEdit(colorToUpdate);
-      setEditing(false);
-    }
   // } [props.colors, props.match.params.id];
   }
 
 
   const deleteColor = color => {
     // make a delete request to delete this color
+    axiosWithAuth()
+    .delete(`colors/${colorToEdit.id})`, colorToEdit)
+    .then(res => {
+      const newColors = [...colors];
+      newColors[colors.findIndex((color) => color === res.data.id)] = res.data;
+    })
+    .catch(err => console.log(err))
   };
 
   return (
