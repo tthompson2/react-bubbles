@@ -45,6 +45,7 @@ const ColorList = ({ colors, updateColors }) => {
     .then(res => {
       const newColors = [...colors];
       newColors[colors.findIndex((color) => color === res.data.id)] = res.data;
+      updateColors(newColors);
     })
     .catch(err => console.log(err))
   };
