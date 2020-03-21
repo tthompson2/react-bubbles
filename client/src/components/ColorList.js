@@ -18,10 +18,25 @@ const ColorList = ({ colors, updateColors }) => {
 
   const saveEdit = e => {
     e.preventDefault();
+
+    console.log("This is what is stored in the paratmere: ", e);
     // Make a put request to save your updated color
     // think about where will you get the id from...
-    // where is is saved right now?
-  };
+    // where is it saved right now?
+
+    const colorToUpdate = colors.find(color => {
+      return `${color.id}` === e.match.params.id;
+    })
+
+    console.log("colorToUpdate:", colorToUpdate);
+
+    if(colorToUpdate) {
+      setColorToEdit(colorToUpdate);
+      setEditing(false);
+    }
+  // } [props.colors, props.match.params.id];
+  }
+
 
   const deleteColor = color => {
     // make a delete request to delete this color
@@ -39,7 +54,7 @@ const ColorList = ({ colors, updateColors }) => {
                     deleteColor(color)
                   }
                 }>
-                  x
+                  
               </span>{" "}
               {color.color}
             </span>
