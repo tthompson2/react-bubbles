@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
+import "./styles.scss";
 import App from "./App";
 import thunk from "redux-thunk";
 
-import BubbleReducer from "./reducer/FriendReducer";
+import BubbleReducer from "./reducer/BubbleReducer";
 
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from "react-redux";
