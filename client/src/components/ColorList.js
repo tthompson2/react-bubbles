@@ -28,10 +28,17 @@ const ColorList = ({ colors, updateColors }) => {
     axiosWithAuth()
     .put(`colors/${colorToEdit.id}`, colorToEdit)
     .then(res => {
-      const newColors = [...colors];
-      newColors[colors.findIndex((color) => color === res.data.id)] = res.data;
-      updateColors(newColors);
+      // const newColors = [...colors];
+      // newColors[colors.findIndex((color) => color === res.data.id)] = res.data;
+      // console.log(res.data);
+      // updateColors(newColors);
+      axiosWithAuth()
+      .get(`colors/`)
+      .then(res => {
+        updateColors(res.data);
+      })
     })
+    
     .catch(err => console.log(err))
 
   // } [props.colors, props.match.params.id];
@@ -40,13 +47,19 @@ const ColorList = ({ colors, updateColors }) => {
 
   const deleteColor = color => {
     // make a delete request to delete this color
+    
     axiosWithAuth()
-    .delete(`colors/${colorToEdit.id})`, colorToEdit)
-    .then(res => {
-      const newColors = [...colors];
-      newColors[colors.findIndex((color) => color === res.data.id)] = res.data;
-      updateColors(newColors);
-    })
+    .delete(`colors/${color.id}`)
+    .then(
+      axiosWithAuth()
+      .get(`colors/`)
+      .then(res => {
+        updateColors(res.data);
+      })
+      // const newColors = [...colors];
+      // newColors[colors.findIndex((color) => color === res.data.id)] = res.data;
+      // updateColors(newColors);
+    )
     .catch(err => console.log(err))
   };
 
@@ -62,7 +75,7 @@ const ColorList = ({ colors, updateColors }) => {
                     deleteColor(color)
                   }
                 }>
-                  
+                X  
               </span>{" "}
               {color.color}
             </span>

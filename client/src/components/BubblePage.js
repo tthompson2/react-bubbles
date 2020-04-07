@@ -19,6 +19,31 @@ class BubblePage extends React.Component {
         this.getData();
     }
 
+    setColorList = (data) => {
+      console.log(data);
+
+      // let itemToUpdate = this.state.colorList.find(item =>{
+      //   return `$[item.id]` === event.id
+      // })
+      
+      this.setState({
+        colorList: data
+        // ...this.state.colorList, [event.target.name] : data
+      });
+    }
+    
+    deleteColor = (event) => {
+      event.persist();
+
+      this.setState({
+        colorList : {
+          ...this.state.colorList,
+          [event.target.name]: event.target.value
+        }
+
+      })
+    }
+
     getData = () => {
         axiosWithAuth()
             .get("/colors") // need to edit this to be where ever the data is stored for the server
@@ -35,7 +60,7 @@ class BubblePage extends React.Component {
   render() {
   return (
     <>
-      <ColorList colors={this.state.colorList} updateColors={this.state.setColorList} />
+      <ColorList colors={this.state.colorList} updateColors={this.setColorList} />
       <Bubbles colors={this.state.colorList} />
     </>
   );
