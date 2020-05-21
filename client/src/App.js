@@ -1,8 +1,12 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Login from "./components/Login";
 import "./styles.scss";
+import BubblePage from "./components/BubblePage";
+import PrivateRoute from "./components/PrivateRoute";
+
+import { connect}  from "react-redux";
 
 function App() {
   return (
@@ -13,9 +17,16 @@ function App() {
           Build a PrivateRoute component that will 
           display BubblePage when you're authenticated 
         */}
+        <Switch>
+          <PrivateRoute exact path="/protected" component={BubblePage}/>
+        </Switch>
       </div>
     </Router>
   );
 }
 
-export default App;
+const mapStateToProps = state => {
+  return { state };
+}
+
+export default connect (mapStateToProps, {} )(App);
